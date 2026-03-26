@@ -117,12 +117,9 @@ export function StatsSection() {
             </div>
           </div>
 
-          {/* Decorative Dot */}
-          <div style={dotStyle} className="hidden lg:flex">
-            <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#08331E' }} />
-          </div>
 
-          <div style={dividerStyle} className="hidden md:block lg:hidden" />
+
+          <div style={dividerStyle} className="hidden md:block" />
 
           {/* Item 3 */}
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
