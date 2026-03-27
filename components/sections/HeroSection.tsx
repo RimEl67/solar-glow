@@ -5,10 +5,13 @@ import Link from 'next/link'
 import { useLanguage } from '@/context/LanguageContext'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useLoading } from '@/context/LoadingContext'
 
 export function HeroSection() {
   const { t, isRTL } = useLanguage()
+  const { setIsLoading, setProgress } = useLoading()
   const [current, setCurrent] = useState(0)
+  const [loadedVideos, setLoadedVideos] = useState<number[]>([])
 
   const slides = [
     {
@@ -58,6 +61,26 @@ export function HeroSection() {
     return () => clearInterval(timer)
   }, [next])
 
+  const handleVideoLoad = (index: number) => {
+    if (!loadedVideos.includes(index)) {
+      const newLoaded = [...loadedVideos, index]
+      setLoadedVideos(newLoaded)
+      
+      // Update progress based on how many videos are loaded
+      const totalVideos = slides.length
+      const currentProgress = (newLoaded.length / totalVideos) * 100
+      setProgress(currentProgress)
+
+      // If the first video (active) is loaded or we reached a good threshold, hide loader
+      if (newLoaded.includes(0)) {
+        setTimeout(() => {
+           setProgress(100)
+           setTimeout(() => setIsLoading(false), 500)
+        }, 500)
+      }
+    }
+  }
+
   const prev = () => setCurrent((c) => (c - 1 + slides.length) % slides.length)
 
   const slide = slides[current]
@@ -97,6 +120,7 @@ export function HeroSection() {
             muted
             loop
             playsInline
+            onCanPlayThrough={() => handleVideoLoad(index)}
             style={{
               width: '100%',
               height: '100%',

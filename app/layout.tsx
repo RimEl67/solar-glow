@@ -33,6 +33,8 @@ import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 import { WhatsAppButton } from '@/components/WhatsAppButton'
 import { LanguageProvider } from '@/context/LanguageContext'
+import { LoadingProvider } from '@/context/LoadingContext'
+import { LoadingScreen } from '@/components/ui/LoadingScreen'
 
 export default function RootLayout({
   children,
@@ -48,12 +50,15 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <LanguageProvider>
-          <Navbar />
-          {children}
-          <Footer />
-          <WhatsAppButton />
-        </LanguageProvider>
+        <LoadingProvider>
+          <LanguageProvider>
+            <LoadingScreen />
+            <Navbar />
+            {children}
+            <Footer />
+            <WhatsAppButton />
+          </LanguageProvider>
+        </LoadingProvider>
       </body>
     </html>
   )
