@@ -30,9 +30,9 @@ export function StatsSection() {
   }
 
   const numberStyle: React.CSSProperties = {
-    fontSize: '56px',
+    fontSize: 'clamp(40px, 8vw, 56px)',
     fontWeight: 700,
-    color: '#08331E', // Very dark green from screenshot
+    color: '#08331E',
     lineHeight: 1,
     display: 'flex',
     alignItems: 'center',
@@ -42,14 +42,14 @@ export function StatsSection() {
   }
 
   const symbolStyle: React.CSSProperties = {
-    color: '#C19A5B', // Muted gold from screenshot
-    fontSize: '32px',
+    color: '#C19A5B',
+    fontSize: 'clamp(20px, 4vw, 32px)',
     fontWeight: 600,
     marginTop: '6px'
   }
 
   const textStyle: React.CSSProperties = {
-    fontSize: '11px',
+    fontSize: 'clamp(10px, 2vw, 11px)',
     fontWeight: 700,
     letterSpacing: '1.5px',
     color: '#9E9E9E',
@@ -77,7 +77,7 @@ export function StatsSection() {
   }
 
   return (
-    <section style={{ background: '#F8F9F7', padding: '80px 0 0' }}>
+    <section style={{ background: '#F8F9F7', padding: '60px 0 0' }}>
       <div className="container-xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

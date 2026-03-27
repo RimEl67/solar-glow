@@ -41,31 +41,38 @@ export function Navbar() {
         boxShadow: scrolled ? '0 4px 20px rgba(0,0,0,0.05)' : 'none',
         transition: 'all 0.3s ease'
       }}>
-        <div className="container-xl" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 24px' }}>
+        <div className="container-xl" style={{ 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center', 
+          padding: scrolled ? '12px 16px' : '16px 24px',
+          transition: 'padding 0.3s ease'
+        }}>
 
           {/* Logo */}
-          <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px', flexDirection: isRTL ? 'row-reverse' : 'row' }}>
+          <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px', flexDirection: isRTL ? 'row-reverse' : 'row' }}>
             <div style={{
-              width: '42px', height: '42px',
+              width: '38px', height: '38px',
               background: 'linear-gradient(135deg, #2E7D32, #4CAF50)',
               borderRadius: '10px',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              boxShadow: '0 4px 12px rgba(46,125,50,0.2)'
+              boxShadow: '0 4px 12px rgba(46,125,50,0.2)',
+              flexShrink: 0
             }}>
-              <div style={{ width: '20px', height: '20px', border: '3px solid #fff', borderRadius: '50%' }} />
+              <div style={{ width: '18px', height: '18px', border: '2.5px solid #fff', borderRadius: '50%' }} />
             </div>
             <div style={{ textAlign: isRTL ? 'right' : 'left' }}>
-              <div style={{ fontFamily: isRTL ? 'Cairo, sans-serif' : 'Sora, sans-serif', fontSize: '22px', fontWeight: 900, color: '#1A1A1A', letterSpacing: '-0.5px', lineHeight: 1 }}>
+              <div style={{ fontFamily: isRTL ? 'Cairo, sans-serif' : 'Sora, sans-serif', fontSize: '20px', fontWeight: 900, color: '#1A1A1A', letterSpacing: '-0.5px', lineHeight: 1 }}>
                 Solar<span style={{ color: '#2E7D32' }}>Glow</span>
               </div>
-              <div style={{ fontSize: '10px', color: '#999', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', marginTop: '2px' }}>
+              <div style={{ fontSize: '9px', color: '#999', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', marginTop: '2px' }}>
                 {isRTL ? 'حلول الطاقة' : 'Solutions Énergie'}
               </div>
             </div>
           </Link>
 
           {/* Desktop Menu */}
-          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }} className="hidden lg:flex">
+          <div style={{ gap: '4px', alignItems: 'center' }} className="hidden lg:flex">
             {navLinks.map((link) => (
               <Link
                 key={link.href}

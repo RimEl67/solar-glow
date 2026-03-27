@@ -65,16 +65,17 @@ export function HeroSection() {
   return (
     <section
       id="hero"
+      className="hero-section"
       style={{
         position: 'relative',
-        height: 'calc(100vh - 80px)',
+        height: '100vh',
         minHeight: '600px',
         maxHeight: '1080px',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: isRTL ? 'flex-end' : 'flex-start',
+        justifyContent: 'center', // Center for all screens to simplify
         overflow: 'hidden',
-        background: '#000', // Solid black background to avoid flashes
+        background: '#000',
       }}
     >
       {/* Background Videos with Cross-fade */}
@@ -127,19 +128,27 @@ export function HeroSection() {
       <div style={{ position: 'absolute', [isRTL ? 'left' : 'right']: '80px', bottom: '-100px', width: '300px', height: '300px', borderRadius: '50%', background: 'rgba(255,255,255,0.05)', zIndex: 1 }} />
 
       {/* Content */}
-      <div className="container-xl" style={{ position: 'relative', zIndex: 10, margin: isRTL ? '0 0 0 auto' : '0 auto 0 0' }}>
+      <div className="container-xl" style={{ 
+        position: 'relative', 
+        zIndex: 10, 
+        width: '100%',
+        display: 'flex',
+        justifyContent: isRTL ? 'flex-end' : 'flex-start',
+        padding: '0 20px'
+      }}>
         <AnimatePresence mode="wait">
           <motion.div
             key={current}
-            initial={{ opacity: 0, x: isRTL ? 30 : -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: isRTL ? -30 : 30 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
             style={{ 
-              maxWidth: '640px', 
+              maxWidth: '720px', 
               textAlign: isRTL ? 'right' : 'left',
-              padding: isRTL ? '0 24px 0 0' : '0 0 0 24px'
+              margin: isRTL ? '0 0 0 auto' : '0'
             }}
+            className="mobile-content-center"
           >
             {/* Tag */}
             <div style={{
@@ -172,15 +181,17 @@ export function HeroSection() {
 
             {/* Subtitle */}
             <p style={{
-              fontSize: 'clamp(16px, 2.5vw, 20px)',
-              color: 'rgba(255,255,255,0.95)',
+              fontSize: 'clamp(15px, 2.5vw, 20px)',
+              color: 'rgba(255,255,255,0.9)',
               lineHeight: 1.6,
-              marginBottom: '44px',
+              marginBottom: '40px',
               maxWidth: '560px',
               marginLeft: isRTL ? 'auto' : '0',
               marginRight: isRTL ? '0' : 'auto',
               textShadow: '0 1px 5px rgba(0,0,0,0.2)'
-            }}>
+            }}
+            className="hero-subtitle-mobile"
+            >
               {slide.subtitle}
             </p>
 
@@ -191,17 +202,16 @@ export function HeroSection() {
                 style={{
                   background: '#fff', color: '#1B4D2E',
                   border: 'none', borderRadius: '12px',
-                  padding: '18px 40px',
-                  fontSize: '15.5px', fontWeight: 800,
+                  padding: '16px 32px',
+                  fontSize: '15px', fontWeight: 800,
                   cursor: 'pointer', fontFamily: isRTL ? 'Cairo, sans-serif' : 'DM Sans, sans-serif',
-                  transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                  transition: 'all 0.3s ease',
                   display: 'flex', alignItems: 'center', gap: '10px',
                   boxShadow: '0 10px 40px rgba(0,0,0,0.3)',
                   flexDirection: isRTL ? 'row-reverse' : 'row',
                   textDecoration: 'none'
                 }}
-                onMouseEnter={e => (e.currentTarget.style.transform = 'translateY(-4px) scale(1.02)')}
-                onMouseLeave={e => (e.currentTarget.style.transform = 'translateY(0) scale(1)')}
+                className="w-full sm:w-auto justify-center"
               >
                 {slide.cta} {isRTL ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
               </Link>
@@ -211,23 +221,15 @@ export function HeroSection() {
                   background: 'rgba(255,255,255,0.08)', color: '#fff',
                   border: '1px solid rgba(255,255,255,0.25)',
                   borderRadius: '12px',
-                  padding: '17px 36px',
-                  fontSize: '15.5px', fontWeight: 700,
+                  padding: '16px 32px',
+                  fontSize: '15px', fontWeight: 700,
                   cursor: 'pointer', fontFamily: isRTL ? 'Cairo, sans-serif' : 'DM Sans, sans-serif',
                   transition: 'all 0.3s ease',
                   backdropFilter: 'blur(12px)',
-                  textDecoration: 'none'
+                  textDecoration: 'none',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center'
                 }}
-                onMouseEnter={e => {
-                  (e.currentTarget.style.borderColor = '#fff')
-                  ;(e.currentTarget.style.background = 'rgba(255,255,255,0.15)')
-                  ;(e.currentTarget.style.transform = 'translateY(-2px)')
-                }}
-                onMouseLeave={e => {
-                  (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.25)')
-                  ;(e.currentTarget.style.background = 'rgba(255,255,255,0.08)')
-                  ;(e.currentTarget.style.transform = 'translateY(0)')
-                }}
+                className="w-full sm:w-auto"
               >
                 {t('ui_devis')}
               </Link>
@@ -257,14 +259,15 @@ export function HeroSection() {
         ))}
       </div>
 
-      {/* Arrow controls */}
+      {/* Arrow controls - Desktop only */}
       <button
         onClick={prev}
+        className="hidden md:flex"
         style={{
           position: 'absolute', left: '32px', top: '50%', transform: 'translateY(-50%)',
           background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)',
           borderRadius: '50%', width: '56px', height: '56px',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          alignItems: 'center', justifyContent: 'center',
           cursor: 'pointer', color: '#fff', zIndex: 20,
           transition: 'all 0.3s ease',
           backdropFilter: 'blur(10px)',
@@ -276,11 +279,12 @@ export function HeroSection() {
       </button>
       <button
         onClick={next}
+        className="hidden md:flex"
         style={{
           position: 'absolute', right: '32px', top: '50%', transform: 'translateY(-50%)',
           background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)',
           borderRadius: '50%', width: '56px', height: '56px',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          alignItems: 'center', justifyContent: 'center',
           cursor: 'pointer', color: '#fff', zIndex: 20,
           transition: 'all 0.3s ease',
           backdropFilter: 'blur(10px)',
