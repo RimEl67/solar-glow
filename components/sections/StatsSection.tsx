@@ -84,14 +84,8 @@ export function StatsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
+          className="stats-section-grid"
           style={{
-            background: 'transparent',
-            padding: '40px 0',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexWrap: 'wrap',
-            gap: '20px',
             flexDirection: isRTL ? 'row-reverse' : 'row'
           }}
         >

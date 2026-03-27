@@ -16,9 +16,6 @@ export function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       style={{
-        position: 'fixed',
-        bottom: '30px',
-        right: '30px',
         width: '60px',
         height: '60px',
         background: '#25D366',

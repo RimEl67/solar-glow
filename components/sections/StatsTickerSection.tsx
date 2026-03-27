@@ -72,40 +72,22 @@ export function StatsTickerSection() {
         {/* Top gold accent line */}
         <div style={{ height: '3px', background: 'linear-gradient(90deg, transparent, #F5A623, transparent)' }} />
 
-        <div className="container-xl reveal" style={{ padding: '48px 24px' }}>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: '0',
-          }}>
+        <div className="container-xl reveal stats-bar-container">
+          <div className="stats-ticker-grid">
             {stats.map((s, i) => (
               <div
                 key={i}
-                className={`reveal-scale delay-${(i + 1) * 100}`}
+                className={`stats-ticker-item reveal-scale delay-${(i + 1) * 100}`}
                 style={{
-                  padding: '32px 40px',
                   borderRight: i < stats.length - 1 ? '1px solid #E8EDE9' : 'none',
-                  textAlign: 'left',
                 }}
               >
-                <div style={{
-                  fontSize: 'clamp(40px, 5vw, 64px)',
-                  fontWeight: 900,
-                  
-                  lineHeight: 1,
-                  marginBottom: '8px',
+                <div className="stats-ticker-num" style={{
                   color: i % 2 === 0 ? '#0B2215' : '#F5A623',
-                  letterSpacing: '-1px',
                 }}>
                   {s.num}
                 </div>
-                <div style={{
-                  fontSize: '11px',
-                  fontWeight: 700,
-                  letterSpacing: '2px',
-                  color: '#6B8A72',
-                  textTransform: 'uppercase',
-                }}>
+                <div className="stats-ticker-label">
                   {s.label}
                 </div>
               </div>
@@ -116,13 +98,6 @@ export function StatsTickerSection() {
         <div style={{ height: '3px', background: 'linear-gradient(90deg, transparent, rgba(245,166,35,0.3), transparent)' }} />
       </div>
 
-      {/* Ticker keyframes injected inline */}
-      <style>{`
-        @keyframes ticker {
-          from { transform: translateX(0); }
-          to   { transform: translateX(-33.333%); }
-        }
-      `}</style>
     </section>
   )
 }

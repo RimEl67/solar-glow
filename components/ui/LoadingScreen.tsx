@@ -69,7 +69,7 @@ export function LoadingScreen() {
 
           {/* Progress Bar Container */}
           <div style={{ 
-            width: '240px', 
+            width: 'min(280px, 80%)', 
             height: '4px', 
             background: '#F0F0F0', 
             borderRadius: '4px', 
