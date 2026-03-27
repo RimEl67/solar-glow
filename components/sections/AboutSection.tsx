@@ -36,10 +36,10 @@ export function AboutSection() {
       <div style={{ position: 'absolute', top: '-100px', [isRTL ? 'left' : 'right']: '-100px', width: '500px', height: '500px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(245,166,35,0.06) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
       <div className="container-xl">
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'center', flexDirection: isRTL ? 'row-reverse' : 'row' }} className="md:grid-cols-2 grid-cols-1">
+        <div className="responsive-grid-2 reveal-container" style={{ direction: isRTL ? 'rtl' : 'ltr' }}>
           
           {/* Left: Images stacked */}
-          <div className={isRTL ? 'reveal-right' : 'reveal-left'} style={{ position: 'relative', height: '580px' }}>
+          <div className={isRTL ? 'reveal-right' : 'reveal-left'} style={{ position: 'relative', height: 'clamp(350px, 60vw, 580px)' }}>
             {/* Main image */}
             <div style={{ position: 'absolute', top: 0, [isRTL ? 'right' : 'left']: 0, [isRTL ? 'left' : 'right']: '60px', height: '400px', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 30px 80px rgba(0,0,0,0.6)' }}>
               <Image src="/about-engineer.jpg" alt="Ingénieur SolarGlow" fill style={{ objectFit: 'cover' }} />

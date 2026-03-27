@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { useLanguage } from '@/context/LanguageContext'
 
 const miniStats = [
   { num: '14', label: 'TYPES DE PANNEAUX' },
@@ -9,6 +10,7 @@ const miniStats = [
 ]
 
 export function TechDemoSection() {
+  const { isRTL } = useLanguage()
   const ref = useRef<HTMLElement>(null)
   const [playing, setPlaying] = useState(true)
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -47,12 +49,7 @@ export function TechDemoSection() {
       <div style={{ position: 'absolute', top: '-150px', left: '-100px', width: '500px', height: '500px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(74,222,128,0.06) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
       <div className="container-xl" style={{ position: 'relative', zIndex: 1 }}>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 1.2fr',
-          gap: '72px',
-          alignItems: 'center',
-        }}>
+        <div className="responsive-grid-2" style={{ gap: '72px', direction: isRTL ? 'rtl' : 'ltr' }}>
 
           {/* LEFT: Text content */}
           <div>

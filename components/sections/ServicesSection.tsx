@@ -79,8 +79,7 @@ export function ServicesSection() {
         </div>
 
         <div
-          className="reveal delay-200 grid md:grid-cols-3 sm:grid-cols-1"
-          style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}
+          className="services-grid reveal delay-200"
         >
           {services.map((s, i) => (
             <div key={i} className="service-card" style={{ textAlign: isRTL ? 'right' : 'left' }}>

@@ -45,13 +45,7 @@ export function Footer() {
   return (
     <footer style={{ background: '#fff', borderTop: '1px solid #E8E8E8', padding: '60px 0 40px' }}>
       <div className="container-xl">
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: '1.5fr 1fr 1fr 1fr',
-          gap: '40px',
-          marginBottom: '60px',
-          direction: isRTL ? 'rtl' : 'ltr'
-        }}>
+        <div className="footer-grid" style={{ direction: isRTL ? 'rtl' : 'ltr' }}>
 
           {/* Brand & Contact */}
           <div>

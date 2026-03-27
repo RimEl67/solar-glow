@@ -35,15 +35,7 @@ export function CtaBannerSection() {
             background: 'rgba(255,255,255,0.04)', pointerEvents: 'none',
           }} />
 
-          <div style={{
-            position: 'relative',
-            zIndex: 1,
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            alignItems: 'center',
-            gap: '48px',
-            flexDirection: isRTL ? 'row-reverse' : 'row'
-          }}>
+          <div className="responsive-grid-2" style={{ gap: '48px', direction: isRTL ? 'rtl' : 'ltr' }}>
             {/* Left Content */}
             <div style={{ textAlign: isRTL ? 'right' : 'left' }}>
               <div style={{
