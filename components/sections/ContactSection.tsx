@@ -63,7 +63,7 @@ export function ContactSection() {
   return (
     <section id="contact" ref={ref} style={{ background: '#F9FAFB', padding: '100px 0', borderTop: '1px solid #EAEAEA' }}>
       <div className="container-xl">
-        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.5fr) minmax(0, 1fr)', gap: '80px', alignItems: 'start', direction: isRTL ? 'rtl' : 'ltr' }}>
+        <div className="responsive-grid-2" style={{ gap: '60px', alignItems: 'start', direction: isRTL ? 'rtl' : 'ltr' }}>
 
           {/* Left Column: Form */}
           <div className="reveal-left" style={{ textAlign: isRTL ? 'right' : 'left' }}>
@@ -79,7 +79,7 @@ export function ContactSection() {
                   {isRTL ? 'اطلب عرض سعر خاص بك' : 'Demandez votre Obtenir un devis'}
                 </h2>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px', marginBottom: '32px' }}>
+                <div className="form-grid" style={{ marginBottom: '32px' }}>
                   <div>
                     <label style={labelStyle}>{isRTL ? 'الاسم الكامل *' : 'Nom complet *'}</label>
                     <input required style={inputStyle} placeholder={isRTL ? 'اسمك' : 'Votre nom'} value={form.name} onChange={e => setForm({ ...form, name: e.target.value })}
@@ -94,7 +94,7 @@ export function ContactSection() {
                   </div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px', marginBottom: '32px' }}>
+                <div className="form-grid" style={{ marginBottom: '32px' }}>
                   <div>
                     <label style={labelStyle}>{isRTL ? 'الهاتف' : 'Téléphone'}</label>
                     <input type="tel" style={inputStyle} placeholder="+212 XX XXX XXXX" value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })}

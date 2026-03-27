@@ -18,7 +18,7 @@ export function CtaBannerSection() {
     <section style={{ padding: '40px 0 80px', background: '#F8F8F8' }}>
       <div className="container-xl">
         <div className="cta-banner" style={{
-          padding: '64px',
+          padding: 'clamp(24px, 6vw, 64px)',
           borderRadius: '24px',
           overflow: 'hidden',
           position: 'relative'
@@ -64,8 +64,9 @@ export function CtaBannerSection() {
               {/* Stats Grid */}
               <div style={{
                 display: 'flex',
-                gap: '32px',
+                gap: 'clamp(16px, 4vw, 32px)',
                 marginBottom: '40px',
+                flexWrap: 'wrap',
                 flexDirection: isRTL ? 'row-reverse' : 'row',
                 justifyContent: isRTL ? 'flex-end' : 'flex-start'
               }}>
@@ -80,6 +81,7 @@ export function CtaBannerSection() {
               <div style={{
                 display: 'flex',
                 gap: '16px',
+                flexWrap: 'wrap',
                 flexDirection: isRTL ? 'row-reverse' : 'row',
                 justifyContent: isRTL ? 'flex-end' : 'flex-start'
               }}>

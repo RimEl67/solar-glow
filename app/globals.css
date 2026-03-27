@@ -673,6 +673,16 @@ html {
   .footer-grid { grid-template-columns: 1fr; gap: 32px; }
 }
 
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+@media (max-width: 768px) {
+  .form-grid { grid-template-columns: 1fr; gap: 24px; }
+}
+
 .services-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
