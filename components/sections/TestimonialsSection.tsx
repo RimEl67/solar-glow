@@ -73,10 +73,10 @@ export function TestimonialsSection() {
         <div style={{
           display: 'flex',
           flexDirection: isRTL ? 'row-reverse' : 'row',
-          justifyContent: 'space-between',
-          alignItems: 'flex-start',
+          justifyContent: 'flex-start',
+          alignItems: 'center',
           marginBottom: '80px',
-          gap: '60px',
+          gap: ' clamp(40px, 8vw, 120px) ',
           flexWrap: 'wrap'
         }}>
           <div style={{ flex: 1, minWidth: '300px', textAlign: isRTL ? 'right' : 'left' }}>
@@ -84,13 +84,13 @@ export function TestimonialsSection() {
               {isRTL ? 'الشهادات' : 'TÉMOIGNAGES'}
             </div>
             <h2 className="reveal delay-100" style={{
-              fontSize: 'clamp(40px, 8vw, 90px)',
-              fontWeight: 900,
-              lineHeight: 0.9,
-              color: '#000',
+              fontSize: 'clamp(40px, 7vw, 75px)',
+              fontWeight: 800,
+              lineHeight: 1,
+              color: '#1A1A1A',
               textTransform: 'uppercase',
               letterSpacing: '-2px',
-              fontFamily: 'Sora, sans-serif',
+              fontFamily: isRTL ? 'Cairo, sans-serif' : 'Alexandria, sans-serif',
               margin: 0
             }}>
               {isRTL ? 'هم يثقون بنا' : 'ILS NOUS FONT CONFIANCE'}
@@ -102,10 +102,10 @@ export function TestimonialsSection() {
               fontSize: '18px',
               color: '#444',
               lineHeight: 1.6,
-              maxWidth: '500px',
-              marginTop: '40px',
+              maxWidth: '480px',
+              marginTop: '20px',
               fontFamily: isRTL ? 'Cairo, sans-serif' : 'inherit',
-              [isRTL ? 'marginRight' : 'marginLeft']: 'auto'
+              [isRTL ? 'marginRight' : 'marginLeft']: '0'
             }}>
               {isRTL
                 ? "SolarGlow هي شركة جادة تركز على العلاقة مع عملائها. تقترح تدخلات كاملة، موثوقة ومستدامة."

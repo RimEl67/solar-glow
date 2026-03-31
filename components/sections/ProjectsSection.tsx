@@ -6,7 +6,7 @@ import Image from 'next/image'
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 import { useLanguage } from '@/context/LanguageContext'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, MapPin } from 'lucide-react'
 
 const projectData = [
   {
@@ -141,13 +141,20 @@ export function ProjectsSection() {
                 <div key={i} className="embla__slide md:flex-[0_0_33.333%] sm:flex-[0_0_50%] flex-[0_0_100%] transition-transform duration-300 hover:scale-[1.02] pl-6">
                   <div className="relative rounded-sm overflow-hidden aspect-[4/3] shadow-lg">
                     <Image src={p.img} alt={content.title} fill className="object-cover" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex flex-col justify-end p-6" style={{ textAlign: isRTL ? 'right' : 'left' }}>
-                      <h3 className="text-white text-lg font-semibold mb-1" style={{ fontFamily: isRTL ? 'Cairo, sans-serif' : 'inherit' }}>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end items-center text-center p-8">
+                      <h3 className="text-white text-xl font-bold mb-3 tracking-tight" style={{ 
+                        fontFamily: isRTL ? 'Cairo, sans-serif' : 'Alexandria, sans-serif',
+                        lineHeight: 1.25,
+                        maxWidth: '90%'
+                      }}>
                         {content.title}
                       </h3>
-                      <p className="text-white/80 text-sm font-normal" style={{ fontFamily: isRTL ? 'Cairo, sans-serif' : 'inherit' }}>
-                        {content.location}
-                      </p>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'center' }}>
+                        <MapPin size={14} className="text-[#d95015]" />
+                        <p className="text-white/90 text-sm font-medium" style={{ fontFamily: isRTL ? 'Cairo, sans-serif' : 'inherit' }}>
+                          {content.location}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
