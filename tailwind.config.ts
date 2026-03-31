@@ -8,19 +8,26 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'primary-dark': '#0B1E3F',
-        'primary-blue': '#1A3A52',
-        'primary-gold': '#FFB84D',
-        'accent-gold': '#FFB84D',
-        'accent-gold-light': '#FFC966',
-        'accent-green': '#2D9B6D',
+        'sg-orange': '#d95015',
+        'sg-green-dark': '#0d410e',
+        'sg-cream': '#fdf5dd',
+        'sg-blue-light': '#0db0e5',
+        'sg-green-bright': '#8cc311',
+        'sg-navy': '#022b63',
+        // Preserve legacy names for backward compatibility initially, mapping to new colors
+        'primary-dark': '#022b63', // sg-navy
+        'primary-blue': '#0db0e5', // sg-blue-light
+        'primary-gold': '#d95015', // sg-orange
+        'accent-gold': '#d95015', // sg-orange
+        'accent-gold-light': '#fdf5dd', // sg-cream
+        'accent-green': '#8cc311', // sg-green-bright
         'neutral-light': '#F8F9FA',
         'neutral-gray': '#E8E9EB',
         'neutral-gray-dark': '#4A5568',
       },
       fontFamily: {
         serif: ['Playfair Display', 'serif'],
-        sans: ['Inter', 'sans-serif'],
+        sans: ['Alexandria', 'Inter', 'sans-serif'],
       },
       spacing: {
         hero: '100vh',

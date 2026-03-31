@@ -27,7 +27,7 @@ function ProductCard({ product }: { product: Product }) {
       {/* Body */}
       <div className="product-card-body" style={{ padding: '20px', textAlign: isRTL ? 'right' : 'left', flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
         <div className="product-card-title" style={{ marginBottom: '8px' }}>
-          <div style={{ fontSize: '15px', fontWeight: 700, color: '#1A1A1A', fontFamily: isRTL ? 'Cairo, sans-serif' : 'inherit' }}>{product.title}</div>
+          <div style={{ fontSize: '15px', fontWeight: 700, color: '#022b63', fontFamily: isRTL ? 'Cairo, sans-serif' : 'Alexandria, sans-serif' }}>{product.title}</div>
         </div>
         <p style={{ fontSize: '13px', color: '#666', lineHeight: 1.5, margin: 0, fontFamily: isRTL ? 'Cairo, sans-serif' : 'inherit' }}>
           {product.description}
@@ -65,19 +65,19 @@ export function ProductsSection() {
   const tabProducts = allProducts.filter(p => p.category === activeCategoryString)
 
   return (
-    <section id="produits" ref={ref} style={{ background: '#F8F8F8', padding: '72px 0' }}>
+    <section id="produits" ref={ref} style={{ background: '#f8f8f8', padding: '72px 0' }}>
       <div className="container-xl">
 
         {/* ===== BEST SELLERS with TABS ===== */}
         <div style={{ marginBottom: '64px' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '28px', flexWrap: 'wrap', gap: '16px', flexDirection: isRTL ? 'row-reverse' : 'row' }}>
             <div style={{ textAlign: isRTL ? 'right' : 'left' }}>
-              <div className="section-tag reveal">{t('prod_tag')}</div>
-              <h2 className="section-title-underline reveal delay-100" style={{ fontFamily: isRTL ? 'Cairo, sans-serif' : 'inherit' }}>{t('prod_title')}</h2>
+              <div className="section-tag reveal" style={{ color: '#d95015', fontFamily: isRTL ? 'Cairo, sans-serif' : 'Alexandria, sans-serif' }}>{t('prod_tag')}</div>
+              <h2 className="section-title-underline reveal delay-100" style={{ fontFamily: isRTL ? 'Cairo, sans-serif' : 'Alexandria, sans-serif', color: '#022b63' }}>{t('prod_title')}</h2>
             </div>
             <a
               href="#"
-              style={{ fontSize: '14px', color: '#2E7D32', fontWeight: 600, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '4px', flexDirection: isRTL ? 'row-reverse' : 'row' }}
+              style={{ fontSize: '14px', color: '#d95015', fontWeight: 600, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '4px', flexDirection: isRTL ? 'row-reverse' : 'row' }}
               onMouseEnter={e => (e.currentTarget.style.textDecoration = 'underline')}
               onMouseLeave={e => (e.currentTarget.style.textDecoration = 'none')}
             >
@@ -92,7 +92,7 @@ export function ProductsSection() {
                 key={tab}
                 className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
                 onClick={() => setActiveTab(tab)}
-                style={{ fontFamily: isRTL ? 'Cairo, sans-serif' : 'inherit' }}
+                style={{ fontFamily: isRTL ? 'Cairo, sans-serif' : 'Alexandria, sans-serif' }}
               >
                 {tab}
               </button>
@@ -111,8 +111,8 @@ export function ProductsSection() {
         <div style={{ marginBottom: '64px' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '28px', flexWrap: 'wrap', gap: '16px' }}>
             <div>
-              <div className="section-tag reveal">Offres Spéciales</div>
-              <h2 className="section-title-underline reveal delay-100">Nos Préférés du Moment</h2>
+              <div className="section-tag reveal" style={{ color: '#d95015', fontFamily: isRTL ? 'Cairo, sans-serif' : 'Alexandria, sans-serif' }}>Offres Spéciales</div>
+              <h2 className="section-title-underline reveal delay-100" style={{ fontFamily: isRTL ? 'Cairo, sans-serif' : 'Alexandria, sans-serif', color: '#022b63' }}>Nos Préférés du Moment</h2>
             </div>
           </div>
 
@@ -127,12 +127,12 @@ export function ProductsSection() {
         <div id="nouveaux">
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '28px', flexWrap: 'wrap', gap: '16px' }}>
             <div>
-              <div className="section-tag reveal">Arrivages</div>
-              <h2 className="section-title-underline reveal delay-100">Nouveaux Produits</h2>
+              <div className="section-tag reveal" style={{ color: '#d95015', fontFamily: isRTL ? 'Cairo, sans-serif' : 'Alexandria, sans-serif' }}>Arrivages</div>
+              <h2 className="section-title-underline reveal delay-100" style={{ fontFamily: isRTL ? 'Cairo, sans-serif' : 'Alexandria, sans-serif', color: '#022b63' }}>Nouveaux Produits</h2>
             </div>
             <a
               href="#"
-              style={{ fontSize: '14px', color: '#2E7D32', fontWeight: 600, textDecoration: 'none' }}
+              style={{ fontSize: '14px', color: '#d95015', fontWeight: 600, textDecoration: 'none' }}
             >
               Voir tout →
             </a>

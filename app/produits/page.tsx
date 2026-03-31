@@ -3,18 +3,18 @@
 import { useLanguage } from '@/context/LanguageContext'
 import { SubpageHero } from '@/components/SubpageHero'
 import { motion } from 'framer-motion'
-import { 
-  Sun, 
-  Zap, 
-  Battery, 
-  Droplets, 
-  Box, 
-  Lightbulb, 
-  Thermometer, 
-  Cpu, 
-  Wrench, 
-  Settings, 
-  Activity, 
+import {
+  Sun,
+  Zap,
+  Battery,
+  Droplets,
+  Box,
+  Lightbulb,
+  Thermometer,
+  Cpu,
+  Wrench,
+  Settings,
+  Activity,
   ShieldCheck,
   Search,
   Filter,
@@ -23,12 +23,20 @@ import {
 } from 'lucide-react'
 
 import { useState, useMemo } from 'react'
+import { Modal } from '@/components/ui/Modal'
 import { allProducts, type Product } from '@/data/products'
 
 export default function ProductsPage() {
-  const { t, isRTL } = useLanguage()
+  const { t, isRTL, language } = useLanguage()
   const [activeCategory, setActiveCategory] = useState<string>('Tous les produits')
   const [searchQuery, setSearchQuery] = useState('')
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const handleOpenModal = (product: Product) => {
+    setSelectedProduct(product)
+    setIsModalOpen(true)
+  }
 
   const categories = [
     'Tous les produits',
@@ -51,8 +59,8 @@ export default function ProductsPage() {
 
   return (
     <main>
-      <SubpageHero 
-        title={t('nav_products')} 
+      <SubpageHero
+        title={t('nav_products')}
         subtitle={isRTL ? 'اكتشف مجموعتنا الواسعة من المنتجات الشمسية عالية الجودة من أفضل العلامات التجارية العالمية.' : 'Découvrez notre large gamme de produits solaires haute performance issus des meilleures marques mondiales.'}
         bgImage="/hero-bg.jpg"
       />
@@ -60,13 +68,13 @@ export default function ProductsPage() {
       {/* Main Content Area */}
       <section style={{ padding: '60px 0', background: '#F9F9F9', minHeight: '100vh' }}>
         <div className="container-xl" style={{ display: 'flex', gap: '32px', flexDirection: isRTL ? 'row-reverse' : 'row', alignItems: 'flex-start' }}>
-          
+
           {/* Sidebar */}
           <div style={{ flex: '0 0 280px', background: '#fff', borderRadius: '24px', padding: '32px', border: '1px solid #EAEAEA', position: 'sticky', top: '100px' }} className="hidden lg:block">
-            <h3 style={{ fontSize: '18px', fontWeight: 800, marginBottom: '24px', fontFamily: isRTL ? 'Cairo, sans-serif' : 'Sora, sans-serif' }}>
+            <h3 style={{ fontSize: '18px', fontWeight: 800, marginBottom: '24px', fontFamily: isRTL ? 'Cairo, sans-serif' : 'Alexandria, sans-serif', color: '#022b63' }}>
               {isRTL ? 'الفئات' : 'Catégories'}
             </h3>
-            
+
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               {categories.map((cat, idx) => (
                 <button
@@ -102,7 +110,7 @@ export default function ProductsPage() {
                   }}
                 >
                   {cat}
-                  {activeCategory === cat && <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#166534' }} />}
+                  {activeCategory === cat && <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#d95015' }} />}
                 </button>
               ))}
             </div>
@@ -114,8 +122,8 @@ export default function ProductsPage() {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px', flexWrap: 'wrap', gap: '16px', flexDirection: isRTL ? 'row-reverse' : 'row' }}>
               <div style={{ position: 'relative', flex: '1 1 300px' }}>
                 <Search size={20} style={{ position: 'absolute', [isRTL ? 'right' : 'left']: '20px', top: '50%', transform: 'translateY(-50%)', color: '#999' }} />
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder={isRTL ? 'ابحث عن منتج...' : 'Rechercher un produit...'}
@@ -135,13 +143,13 @@ export default function ProductsPage() {
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.4, delay: i * 0.05 }}
-                  style={{ 
-                    background: '#fff', 
-                    borderRadius: '24px', 
-                    overflow: 'hidden', 
-                    border: '1px solid #EAEAEA', 
-                    display: 'flex', 
-                    flexDirection: 'column', 
+                  style={{
+                    background: '#fff',
+                    borderRadius: '24px',
+                    overflow: 'hidden',
+                    border: '1px solid #EAEAEA',
+                    display: 'flex',
+                    flexDirection: 'column',
                     height: '100%',
                     boxShadow: '0 8px 30px rgba(0,0,0,0.03)'
                   }}
@@ -153,13 +161,13 @@ export default function ProductsPage() {
                       {product.badge ? product.badge.toUpperCase() : product.category.toUpperCase()}
                     </div>
                   </div>
-                  
+
                   {/* Content Area */}
                   <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-                    <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#1A1A1A', marginBottom: '16px', fontFamily: isRTL ? 'Cairo, sans-serif' : 'Sora, sans-serif', textAlign: isRTL ? 'right' : 'left' }}>
+                    <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#022b63', marginBottom: '16px', fontFamily: isRTL ? 'Cairo, sans-serif' : 'Alexandria, sans-serif', textAlign: isRTL ? 'right' : 'left' }}>
                       {product.title}
                     </h3>
-                    
+
                     {/* Sub details */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px', color: '#666', fontSize: '13px', fontWeight: 600, flexDirection: isRTL ? 'row-reverse' : 'row' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -167,29 +175,30 @@ export default function ProductsPage() {
                       </div>
                       <div style={{ width: '4px', height: '4px', borderRadius: '50%', background: '#D9D9D9' }} />
                       <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <CheckCircle size={16} color="#166534" /> {isRTL ? 'متوفر' : 'En Stock'}
+                        <CheckCircle size={16} color="#8cc311" /> {isRTL ? 'متوفر' : 'En Stock'}
                       </div>
                     </div>
-                    
+
                     <div style={{ flexGrow: 1 }} />
-                    
+
                     {/* Button */}
-                    <button 
-                      style={{ 
-                        width: '100%', 
-                        padding: '16px', 
-                        background: '#F5F5F5', 
-                        color: '#333', 
-                        border: 'none', 
-                        borderRadius: '12px', 
-                        fontWeight: 700, 
-                        fontSize: '15px', 
-                        cursor: 'pointer', 
+                    <button
+                      onClick={() => handleOpenModal(product)}
+                      style={{
+                        width: '100%',
+                        padding: '16px',
+                        background: '#F5F5F5',
+                        color: '#333',
+                        border: 'none',
+                        borderRadius: '12px',
+                        fontWeight: 700,
+                        fontSize: '15px',
+                        cursor: 'pointer',
                         transition: 'background 0.3s, color 0.3s',
-                        fontFamily: isRTL ? 'Cairo, sans-serif' : 'inherit'
+                        fontFamily: isRTL ? 'Cairo, sans-serif' : 'Alexandria, sans-serif'
                       }}
                       onMouseEnter={e => {
-                        e.currentTarget.style.background = '#2E7D32'
+                        e.currentTarget.style.background = '#d95015'
                         e.currentTarget.style.color = '#fff'
                       }}
                       onMouseLeave={e => {
@@ -212,6 +221,17 @@ export default function ProductsPage() {
           </div>
         </div>
       </section>
+
+      {selectedProduct && (
+        <Modal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          title={selectedProduct.title}
+          image={selectedProduct.image}
+          category={selectedProduct.category}
+          details={isRTL ? 'منتج شمسي عالي الجودة لجميع احتياجاتك الطاقية.' : 'Produit solaire de haute qualité pour tous vos besoins énergétiques.'}
+        />
+      )}
     </main>
   )
 }

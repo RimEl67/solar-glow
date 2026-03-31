@@ -34,45 +34,59 @@ export function LoadingScreen() {
         >
           {/* Logo Animation */}
           <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 1, repeat: Infinity, repeatType: "reverse" }}
-            style={{ marginBottom: '40px' }}
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: [0.9, 1.05, 1], opacity: 1 }}
+            transition={{ 
+              duration: 1.5,
+              times: [0, 0.6, 1],
+              ease: "easeOut"
+            }}
+            style={{ marginBottom: '60px' }}
           >
-            <div style={{
-              width: '80px', height: '80px',
-              background: 'linear-gradient(135deg, #2E7D32, #4CAF50)',
-              borderRadius: '20px',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              boxShadow: '0 10px 30px rgba(46,125,50,0.2)'
-            }}>
-              <div style={{ width: '40px', height: '40px', border: '5px solid #fff', borderRadius: '50%' }} />
-            </div>
+            <motion.img 
+              src="/logo.png" 
+              alt="SolarGlow" 
+              style={{ 
+                height: '100px', 
+                width: 'auto', 
+                objectFit: 'contain'
+              }}
+              animate={{
+                filter: [
+                  'drop-shadow(0 0 0px rgba(217,80,21,0))',
+                  'drop-shadow(0 0 20px rgba(217,80,21,0.2))',
+                  'drop-shadow(0 0 0px rgba(217,80,21,0))'
+                ]
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
           </motion.div>
 
-          {/* Brand Name */}
+          {/* Percentage Indicator */}
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             style={{ 
-                fontFamily: 'Sora, sans-serif', 
-                fontSize: '28px', 
-                fontWeight: 900, 
-                color: '#1A1A1A', 
-                marginBottom: '40px',
-                letterSpacing: '-1px'
+              fontSize: '14px', 
+              fontWeight: 800, 
+              color: '#d95015', 
+              marginBottom: '12px',
+              fontFamily: 'Alexandria, sans-serif'
             }}
           >
-            Solar<span style={{ color: '#2E7D32' }}>Glow</span>
+            {Math.floor(progress)}%
           </motion.div>
 
           {/* Progress Bar Container */}
           <div style={{ 
             width: 'min(280px, 80%)', 
-            height: '4px', 
-            background: '#F0F0F0', 
-            borderRadius: '4px', 
+            height: '2px', 
+            background: '#F5F5F5', 
+            borderRadius: '10px', 
             overflow: 'hidden',
             position: 'relative'
           }}>
@@ -80,29 +94,13 @@ export function LoadingScreen() {
             <motion.div 
                animate={{ width: `${progress}%` }}
                transition={{ duration: 0.5, ease: "easeOut" }}
-               style={{ 
-                 height: '100%', 
-                 background: '#2E7D32',
-                 borderRadius: '4px'
-               }}
+                style={{ 
+                  height: '100%', 
+                  background: 'linear-gradient(90deg, #022b63, #d95015)',
+                  borderRadius: '10px'
+                }}
             />
           </div>
-
-          {/* Loading Text */}
-          <motion.div
-            animate={{ opacity: [0.4, 0.7, 0.4] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            style={{ 
-              fontSize: '12px', 
-              color: '#999', 
-              fontWeight: 700, 
-              marginTop: '16px', 
-              textTransform: 'uppercase', 
-              letterSpacing: '2px' 
-            }}
-          >
-             {progress < 100 ? 'Chargement...' : 'Prêt'}
-          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>

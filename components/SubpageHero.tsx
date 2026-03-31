@@ -77,11 +77,12 @@ export function SubpageHero({
     <section
       style={{
         position: 'relative',
-        height: '480px',
+        height: '520px', // Increased height to maintain visual balance with padding
         overflow: 'hidden',
         display: 'flex',
         alignItems: 'center',
         background: '#000',
+        paddingTop: '80px'
       }}
     >
       {/* Video background */}
@@ -117,7 +118,7 @@ export function SubpageHero({
         }}
       />
 
-      {/* Dark gradient — stronger on left so text pops */}
+      {/* Dark gradient - stronger on left so text pops */}
       <div
         style={{
           position: 'absolute',
@@ -146,7 +147,7 @@ export function SubpageHero({
         }}
       />
 
-      {/* ── Content — indented from edge ── */}
+      {/* ── Content - indented from edge ── */}
       <div
         style={{
           position: 'relative',

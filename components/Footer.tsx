@@ -49,18 +49,14 @@ export function Footer() {
 
           {/* Brand & Contact */}
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
-              <div style={{
-                width: '40px', height: '40px',
-                background: 'linear-gradient(135deg, #2E7D32, #4CAF50)',
-                borderRadius: '8px',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: '20px',
-              }}>
-                <div style={{ width: '20px', height: '20px', background: '#fff', borderRadius: '50%' }} />
-              </div>
-              <div style={{ fontFamily: 'Sora, sans-serif', fontSize: '18px', fontWeight: 800, color: '#1A1A1A' }}>
-                Solar<span style={{ color: '#2E7D32' }}>Glow</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '20px' }}>
+              <img
+                src="/logo.png"
+                alt="SolarGlow"
+                style={{ height: '120px', width: 'auto', objectFit: 'contain' }}
+              />
+              <div style={{ fontFamily: 'Alexandria, sans-serif', fontSize: '20px', fontWeight: 800, color: '#022b63', display: 'none' }}>
+                Solar<span style={{ color: '#d95015' }}>Glow</span>
               </div>
             </div>
 
@@ -107,7 +103,7 @@ export function Footer() {
             </div>
             <div style={{ fontSize: '13px', color: '#666', lineHeight: 1.6, display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <div>{isRTL ? 'سيدي معروف، الدار البيضاء' : ''}</div>
-              <div style={{ fontWeight: 700, color: '#2E7D32' }}>+212 6 61 28 91 88</div>
+              <div style={{ fontWeight: 700, color: '#d95015' }}>+212 6 61 28 91 88</div>
               <div>contact@solarglow.com</div>
             </div>
           </div>
@@ -117,7 +113,7 @@ export function Footer() {
         {/* Bottom */}
         <div style={{ borderTop: '1px solid #E8E8E8', paddingTop: '24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px', flexDirection: isRTL ? 'row-reverse' : 'row' }}>
           <p style={{ fontSize: '13px', color: '#999', margin: 0, fontFamily: isRTL ? 'Cairo, sans-serif' : 'inherit' }}>
-            © {year} {t('footer_rights')} {isRTL ? '— الدار البيضاء، المغرب' : '—  Maroc'}
+            © {year} {t('footer_rights')} {isRTL ? '- الدار البيضاء، المغرب' : '-  Maroc'}
           </p>
           <p style={{ fontSize: '13px', color: '#999', margin: 0, fontFamily: isRTL ? 'Cairo, sans-serif' : 'inherit' }}>
             {isRTL ? 'الشمس في خدمتكم، 24 ساعة في اليوم' : 'Le soleil à votre service, 24h/24'}

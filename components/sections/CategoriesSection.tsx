@@ -70,14 +70,14 @@ export function CategoriesSection() {
   }
 
   return (
-    <section ref={sectionRef} style={{ background: '#F8F9F7', padding: '100px 0', overflow: 'hidden' }}>
+    <section ref={sectionRef} style={{ background: '#FFFFFF', padding: '100px 0', overflow: 'hidden' }}>
       <div className="container-xl">
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '48px', flexWrap: 'wrap', gap: '16px', flexDirection: isRTL ? 'row-reverse' : 'row' }}>
           <div style={{ textAlign: isRTL ? 'right' : 'left' }}>
-            <div className="section-tag reveal">
+            <div className="section-tag reveal" style={{ color: '#d95015', fontFamily: isRTL ? 'Cairo, sans-serif' : 'Alexandria, sans-serif' }}>
               {isRTL ? 'كتالوج كامل' : 'CATALOGUE COMPLET'}
             </div>
-            <h2 className="section-title-underline reveal delay-100" style={{ fontFamily: isRTL ? 'Cairo, sans-serif' : 'inherit' }}>
+            <h2 className="section-title-underline reveal delay-100" style={{ fontFamily: isRTL ? 'Cairo, sans-serif' : 'Alexandria, sans-serif', color: '#022b63' }}>
               {t('cat_title')}
             </h2>
           </div>
@@ -117,21 +117,21 @@ export function CategoriesSection() {
                   transition: 'all 0.3s ease',
                   boxShadow: '0 8px 30px rgba(0,0,0,0.015)'
                 }}
-                className="hover:border-[#2E7D32] hover:shadow-lg"
+                className="hover:border-[#d95015] hover:shadow-lg"
               >
                 <div style={{
                   width: '56px',
                   height: '56px',
                   borderRadius: '50%',
-                  background: 'rgba(46,125,50,0.04)',
-                  color: '#2E7D32',
+                   background: 'rgba(217,80,21,0.04)',
+                   color: '#d95015',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   marginBottom: '20px',
                   transition: 'all 0.3s ease'
                 }}
-                className="group-hover:bg-[#2E7D32] group-hover:text-white"
+                className="group-hover:bg-[#d95015] group-hover:text-white"
                 >
                   <div style={{ transform: 'scale(0.85)' }}>
                     {cat.icon}
@@ -141,13 +141,13 @@ export function CategoriesSection() {
                 <h3 style={{
                   fontSize: '15px',
                   fontWeight: 800,
-                  color: '#1A1A1A',
-                  margin: '0 0 6px',
-                  textAlign: 'center',
-                  fontFamily: isRTL ? 'Cairo, sans-serif' : 'Sora, sans-serif'
-                }}>
-                  {cat.label}
-                </h3>
+                   color: '#1A1A1A',
+                   margin: '0 0 6px',
+                   textAlign: 'center',
+                   fontFamily: isRTL ? 'Cairo, sans-serif' : 'Alexandria, sans-serif'
+                 }}>
+                   {cat.label}
+                 </h3>
                 
                 <span style={{
                   fontSize: '12px',

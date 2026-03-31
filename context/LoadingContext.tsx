@@ -25,11 +25,29 @@ export function LoadingProvider({ children }: { children: React.ReactNode }) {
     }
   }, [pathname])
 
-  // Safety timeout: dismiss loader after 5 seconds if something fails
+  // Simulated progress logic
+  useEffect(() => {
+    if (!isLoading) {
+      setProgress(100)
+      return
+    }
+
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 95) return prev // Slow down at the end
+        const increment = Math.random() * 15
+        return Math.min(prev + increment, 98)
+      })
+    }, 400)
+
+    return () => clearInterval(interval)
+  }, [isLoading])
+
+  // Safety timeout: dismiss loader after 4 seconds if something fails
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false)
-    }, 5000)
+    }, 4000)
     return () => clearTimeout(timer)
   }, [])
 

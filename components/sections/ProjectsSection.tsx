@@ -69,14 +69,14 @@ export function ProjectsSection() {
               fontWeight: 700,
               color: '#1A1A1A',
               marginBottom: '12px',
-              fontFamily: isRTL ? 'Cairo, sans-serif' : 'Sora, sans-serif'
+              fontFamily: isRTL ? 'Cairo, sans-serif' : 'Alexandria, sans-serif'
             }}>
               {t('nav_projects')}
             </h2>
             <div style={{
               width: '60px',
               height: '4px',
-              background: '#2E7D32',
+              background: '#d95015',
               borderRadius: '2px',
               marginLeft: isRTL ? 'auto' : '0',
               marginRight: isRTL ? '0' : 'auto'
@@ -97,8 +97,8 @@ export function ProjectsSection() {
                 transition: 'all 0.2s'
               }}
               onMouseEnter={e => {
-                e.currentTarget.style.borderColor = '#2E7D32'
-                e.currentTarget.style.color = '#2E7D32'
+                e.currentTarget.style.borderColor = '#d95015'
+                e.currentTarget.style.color = '#d95015'
               }}
               onMouseLeave={e => {
                 e.currentTarget.style.borderColor = '#E8E8E8'
@@ -119,8 +119,8 @@ export function ProjectsSection() {
                 transition: 'all 0.2s'
               }}
               onMouseEnter={e => {
-                e.currentTarget.style.borderColor = '#2E7D32'
-                e.currentTarget.style.color = '#2E7D32'
+                e.currentTarget.style.borderColor = '#d95015'
+                e.currentTarget.style.color = '#d95015'
               }}
               onMouseLeave={e => {
                 e.currentTarget.style.borderColor = '#E8E8E8'
@@ -171,7 +171,7 @@ export function ProjectsSection() {
                 width: i === selectedIndex ? '24px' : '8px',
                 height: '8px',
                 borderRadius: '4px',
-                background: i === selectedIndex ? '#2E7D32' : '#D1D1D1',
+                background: i === selectedIndex ? '#d95015' : '#D1D1D1',
                 border: 'none',
                 cursor: 'pointer',
                 transition: 'all 0.3s ease'
@@ -187,17 +187,17 @@ export function ProjectsSection() {
             href="/projets"
             style={{
               padding: '14px 40px',
-              background: '#2E7D32',
+              background: '#d95015',
               color: '#fff',
               borderRadius: '12px',
               fontWeight: 800,
               fontSize: '15px',
               textDecoration: 'none',
-              boxShadow: '0 8px 20px rgba(46,125,50,0.2)',
-              transition: 'all 0.3s ease',
-              fontFamily: isRTL ? 'Cairo, sans-serif' : 'Sora, sans-serif'
-            }}
-            className="hover:bg-[#1B5E20] hover:-translate-y-1"
+               boxShadow: '0 8px 20px rgba(217,80,21,0.2)',
+               transition: 'all 0.3s ease',
+               fontFamily: isRTL ? 'Cairo, sans-serif' : 'Alexandria, sans-serif'
+             }}
+             className="hover:bg-[#bf4612] hover:-translate-y-1"
           >
             {isRTL ? 'عرض جميع المشاريع' : 'Voir tous nos projets'}
           </Link>

@@ -1,12 +1,11 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-primary: #2E7D32;
+  --color-primary: #d95015;
   --color-primary-light: #4CAF50;
-  --color-primary-dark: #1B5E20;
-  --color-primary-hover: #388E3C;
-  --color-accent: #FF6B00;
-  --color-accent-light: #FF8C33;
+  --color-secondary: #0d410e;
+  --color-accent: #8cc311;
+  --color-background: #fdf5dd;
   --color-dark: #1A1A1A;
   --color-dark-2: #222222;
   --color-surface: #F5F5F5;
@@ -20,8 +19,8 @@
   --color-green-100: #C8E6C9;
   --color-badge-red: #E53935;
 
-  --font-sans: 'DM Sans', sans-serif;
-  --font-display: 'Sora', sans-serif;
+  --font-sans: 'Alexandria', sans-serif;
+  --font-display: 'Alexandria', sans-serif;
 
   --animate-fade-up: fadeUp 0.6s ease-out forwards;
   --animate-fade-in: fadeIn 0.5s ease-out forwards;
@@ -38,11 +37,11 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 90px;
+  scroll-padding-top: 110px;
 }
 
 body {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Alexandria', sans-serif;
   background-color: #FFFFFF;
   color: #1A1A1A;
   overflow-x: hidden;
@@ -60,8 +59,8 @@ html {
 /* ===== SCROLLBAR ===== */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #f1f1f1; }
-::-webkit-scrollbar-thumb { background: #2E7D32; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #388E3C; }
+::-webkit-scrollbar-thumb { background: #d95015; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #bf4612; }
 
 /* ===== SELECTION ===== */
 ::selection { background: rgba(46, 125, 50, 0.2); color: #1A1A1A; }
@@ -134,7 +133,7 @@ html {
   font-weight: 700;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: #2E7D32;
+  color: #d95015;
   margin-bottom: 12px;
 }
 
@@ -143,7 +142,7 @@ html {
   display: block;
   width: 24px;
   height: 2px;
-  background: #2E7D32;
+  background: #d95015;
   border-radius: 2px;
 }
 
@@ -153,7 +152,7 @@ html {
   align-items: center;
   gap: 8px;
   padding: 13px 28px;
-  background: #2E7D32;
+  background: #d95015;
   color: #FFFFFF;
   font-family: 'DM Sans', sans-serif;
   font-weight: 700;
@@ -180,12 +179,12 @@ html {
   gap: 8px;
   padding: 12px 28px;
   background: transparent;
-  color: #2E7D32;
-  font-family: 'DM Sans', sans-serif;
+  color: #d95015;
+  font-family: 'Alexandria', sans-serif;
   font-weight: 700;
   font-size: 14px;
   border-radius: 8px;
-  border: 2px solid #2E7D32;
+  border: 2px solid #d95015;
   cursor: pointer;
   transition: all 0.25s ease;
   text-decoration: none;
@@ -193,7 +192,7 @@ html {
 }
 
 .btn-outline-green:hover {
-  background: #2E7D32;
+  background: #d95015;
   color: #fff;
 }
 
@@ -203,7 +202,7 @@ html {
   justify-content: center;
   gap: 6px;
   padding: 10px 16px;
-  background: #2E7D32;
+  background: #d95015;
   color: #fff;
   font-size: 13px;
   font-weight: 600;
@@ -231,8 +230,8 @@ html {
 }
 
 .product-card:hover {
-  border-color: #C8E6C9;
-  box-shadow: 0 12px 40px rgba(46, 125, 50, 0.12);
+  border-color: #fdf5dd;
+  box-shadow: 0 12px 40px rgba(217, 80, 21, 0.12);
   transform: translateY(-4px);
 }
 
@@ -315,7 +314,7 @@ html {
 .price-new {
   font-size: 16px;
   font-weight: 800;
-  color: #2E7D32;
+  color: #d95015;
 }
 
 .price-range {
@@ -337,8 +336,8 @@ html {
 }
 
 .cat-card:hover {
-  border-color: #2E7D32;
-  box-shadow: 0 8px 24px rgba(46, 125, 50, 0.1);
+  border-color: #d95015;
+  box-shadow: 0 8px 24px rgba(217, 80, 21, 0.1);
   transform: translateY(-3px);
 }
 
@@ -347,7 +346,7 @@ html {
   height: 64px;
   margin: 0 auto 12px;
   border-radius: 50%;
-  background: #E8F5E9;
+  background: #fdf5dd;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -356,7 +355,8 @@ html {
 }
 
 .cat-card:hover .cat-card-icon {
-  background: #C8E6C9;
+  background: #d95015;
+  color: #fff;
 }
 
 .cat-card-title {
@@ -541,8 +541,8 @@ html {
 }
 
 .tab-btn.active, .tab-btn:hover {
-  background: #2E7D32;
-  border-color: #2E7D32;
+  background: #d95015;
+  border-color: #d95015;
   color: #fff;
 }
 
@@ -583,8 +583,8 @@ html {
 }
 
 .service-card:hover {
-  border-color: #2E7D32;
-  box-shadow: 0 12px 40px rgba(46, 125, 50, 0.1);
+  border-color: #d95015;
+  box-shadow: 0 12px 40px rgba(217, 80, 21, 0.1);
   transform: translateY(-3px);
 }
 
@@ -593,7 +593,7 @@ html {
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #2E7D32, #4CAF50);
+  background: linear-gradient(90deg, #d95015, #8cc311);
 }
 
 /* ===== FEATURE BAR ===== */
@@ -746,7 +746,6 @@ html {
   border-radius: 16px;
   overflow: hidden;
   position: relative;
-  background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 50%, #388E3C 100%);
   padding: 60px 48px;
 }
 

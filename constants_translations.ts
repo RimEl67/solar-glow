@@ -26,8 +26,8 @@ export const translations: Record<string, Record<string, string>> = {
 
     hero_tag_4: 'Entreprises & Particuliers',
     hero_title_4: "Investissez dans l'Avenir",
-    hero_sub_4: "L'énergie solaire — un choix rentable pour particuliers et professionnels.",
-    hero_cta_4: 'Obtenir un devis',
+    hero_sub_4: "L'énergie solaire - un choix rentable pour particuliers et professionnels.",
+    hero_cta_4: 'Découvrir',
 
     // Categories Labels
     cat_panneaux: 'Panneaux Solaires',
@@ -135,7 +135,7 @@ export const translations: Record<string, Record<string, string>> = {
     nav_contact: 'اتصل بنا',
 
     // Hero
-    hero_tag_1: 'طاقة متجددة — المغرب',
+    hero_tag_1: 'طاقة متجددة - المغرب',
     hero_title_1: 'الطاقة الشمسية بالمغرب',
     hero_sub_1: 'الشمس، مصدر طاقتكم الجديد.',
     hero_cta_1: 'منتجاتنا',

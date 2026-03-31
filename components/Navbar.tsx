@@ -2,14 +2,18 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useLanguage } from '@/context/LanguageContext'
 import { Menu, X, Facebook, Instagram, Linkedin, Mail, Phone, MapPin } from 'lucide-react'
 
 export function Navbar() {
   const { language, setLanguage, t, isRTL } = useLanguage()
+  const pathname = usePathname()
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+
+  const isHomePage = pathname === '/'
 
   const navLinks = [
     { label: t('nav_home'), href: '/' },
@@ -26,49 +30,49 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Define colors based on scroll state
+  const navBg = scrolled ? 'rgba(255, 255, 255, 0.98)' : 'transparent'
+  const navColor = scrolled ? '#1A1A1A' : '#FFFFFF'
+  const navShadow = scrolled ? '0 10px 30px rgba(0,0,0,0.08)' : 'none'
+  const logoFilter = scrolled ? 'none' : 'none' // We'll keep color logo or use invert if needed. 
+  // Let's use white logo when transparent if it's on the homepage hero or sub-heroes (most subheroes are dark).
+  const useInvertedLogo = !scrolled
+
   return (
     <>
-
-
       {/* Main Navbar */}
       <nav style={{
-        position: 'sticky',
+        position: 'fixed',
         top: 0,
+        left: 0,
+        right: 0,
         zIndex: 1000,
-        background: scrolled ? 'rgba(255, 255, 255, 0.95)' : '#FFFFFF',
-        backdropFilter: scrolled ? 'blur(10px)' : 'none',
-        borderBottom: '1px solid #EAEAEA',
-        boxShadow: scrolled ? '0 4px 20px rgba(0,0,0,0.05)' : 'none',
-        transition: 'all 0.3s ease'
+        background: navBg,
+        backdropFilter: scrolled ? 'blur(12px)' : 'none',
+        borderBottom: scrolled ? '1px solid #EAEAEA' : 'none',
+        boxShadow: navShadow,
+        transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)'
       }}>
-        <div className="container-xl" style={{ 
-          display: 'flex', 
-          justifyContent: 'space-between', 
-          alignItems: 'center', 
-          padding: scrolled ? '12px 16px' : '16px 24px',
-          transition: 'padding 0.3s ease'
+        <div className="container-xl" style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          padding: scrolled ? '8px 16px' : '16px 24px',
+          transition: 'all 0.3s ease'
         }}>
 
           {/* Logo */}
-          <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px', flexDirection: isRTL ? 'row-reverse' : 'row' }}>
-            <div style={{
-              width: '38px', height: '38px',
-              background: 'linear-gradient(135deg, #2E7D32, #4CAF50)',
-              borderRadius: '10px',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              boxShadow: '0 4px 12px rgba(46,125,50,0.2)',
-              flexShrink: 0
-            }}>
-              <div style={{ width: '18px', height: '18px', border: '2.5px solid #fff', borderRadius: '50%' }} />
-            </div>
-            <div style={{ textAlign: isRTL ? 'right' : 'left' }}>
-              <div style={{ fontFamily: isRTL ? 'Cairo, sans-serif' : 'Sora, sans-serif', fontSize: '20px', fontWeight: 900, color: '#1A1A1A', letterSpacing: '-0.5px', lineHeight: 1 }}>
-                Solar<span style={{ color: '#2E7D32' }}>Glow</span>
-              </div>
-              <div style={{ fontSize: '9px', color: '#999', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', marginTop: '2px' }}>
-                {isRTL ? 'حلول الطاقة' : 'Solutions Énergie'}
-              </div>
-            </div>
+          <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px', flexDirection: isRTL ? 'row-reverse' : 'row' }}>
+            <img
+              src="/logo.png"
+              alt="SolarGlow"
+              style={{
+                height: scrolled ? '55px' : '75px',
+                width: 'auto',
+                objectFit: 'contain',
+                transition: 'all 0.3s ease'
+              }}
+            />
           </Link>
 
           {/* Desktop Menu */}
@@ -81,13 +85,13 @@ export function Navbar() {
                   textDecoration: 'none',
                   padding: '8px 18px',
                   fontSize: '15px',
-                  fontWeight: 600,
-                  color: '#333333',
+                  fontWeight: 700,
+                  color: navColor,
                   borderRadius: '8px',
                   transition: 'all 0.2s ease',
-                  fontFamily: isRTL ? 'Cairo, sans-serif' : 'inherit'
+                  fontFamily: isRTL ? 'Cairo, sans-serif' : 'Alexandria, sans-serif'
                 }}
-                className="hover:text-[#2E7D32] hover:bg-[#F1F8E9]"
+                className={scrolled ? "hover:text-[#d95015] hover:bg-[#fdf5dd]" : "hover:text-white/80 hover:bg-white/10"}
               >
                 {link.label}
               </Link>
@@ -98,10 +102,12 @@ export function Navbar() {
             {/* Language Switcher */}
             <div style={{
               display: 'flex',
-              background: '#F5F5F5',
+              background: scrolled ? '#F5F5F5' : 'rgba(255,255,255,0.1)',
               borderRadius: '30px',
               padding: '4px',
-              border: '1px solid #EAEAEA'
+              border: scrolled ? '1px solid #EAEAEA' : '1px solid rgba(255,255,255,0.2)',
+              backdropFilter: scrolled ? 'none' : 'blur(4px)',
+              transition: 'all 0.3s ease'
             }}>
               <button
                 onClick={() => setLanguage('fr')}
@@ -113,7 +119,7 @@ export function Navbar() {
                   border: 'none',
                   cursor: 'pointer',
                   background: language === 'fr' ? '#FFFFFF' : 'transparent',
-                  color: language === 'fr' ? '#2E7D32' : '#777',
+                  color: language === 'fr' ? '#d95015' : (scrolled ? '#777' : '#fff'),
                   boxShadow: language === 'fr' ? '0 2px 8px rgba(0,0,0,0.1)' : 'none',
                   transition: 'all 0.3s ease'
                 }}
@@ -130,7 +136,7 @@ export function Navbar() {
                   border: 'none',
                   cursor: 'pointer',
                   background: language === 'ar' ? '#FFFFFF' : 'transparent',
-                  color: language === 'ar' ? '#2E7D32' : '#777',
+                  color: language === 'ar' ? '#d95015' : (scrolled ? '#777' : '#fff'),
                   boxShadow: language === 'ar' ? '0 2px 8px rgba(0,0,0,0.1)' : 'none',
                   transition: 'all 0.3s ease',
                   fontFamily: 'Cairo, sans-serif'
@@ -143,7 +149,7 @@ export function Navbar() {
             {/* Mobile Menu Toggle */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#1A1A1A' }}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', color: navColor }}
               className="lg:hidden"
             >
               {mobileOpen ? <X size={28} /> : <Menu size={28} />}
@@ -153,17 +159,17 @@ export function Navbar() {
             <Link
               href="/contact"
               style={{
-                background: '#2E7D32',
+                background: '#d95015',
                 color: '#FFFFFF',
-                padding: '12px 24px',
+                padding: scrolled ? '10px 20px' : '12px 24px',
                 borderRadius: '12px',
                 fontSize: '14px',
                 fontWeight: 700,
                 textDecoration: 'none',
-                boxShadow: '0 4px 14px rgba(46,125,50,0.2)',
+                boxShadow: '0 4px 14px rgba(217,80,21,0.2)',
                 transition: 'all 0.3s ease'
               }}
-              className="hidden md:block hover:bg-[#1B5E20] hover:-translate-y-0.5"
+              className="hidden md:block hover:bg-[#bf4612] hover:-translate-y-0.5"
             >
               {t('ui_devis')}
             </Link>
@@ -200,7 +206,7 @@ export function Navbar() {
                       textAlign: isRTL ? 'right' : 'left',
                       fontFamily: isRTL ? 'Cairo, sans-serif' : 'inherit'
                     }}
-                    className="hover:bg-[#F1F8E9] hover:text-[#2E7D32]"
+                    className="hover:bg-[#fdf5dd] hover:text-[#d95015]"
                   >
                     {link.label}
                   </Link>
@@ -209,7 +215,7 @@ export function Navbar() {
                   href="/contact"
                   onClick={() => setMobileOpen(false)}
                   style={{
-                    background: '#2E7D32',
+                    background: '#d95015',
                     color: '#FFFFFF',
                     padding: '16px',
                     borderRadius: '12px',

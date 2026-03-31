@@ -26,13 +26,13 @@ export function StatsSection() {
   const { isRTL } = useLanguage()
 
   const statsClass = {
-    fontFamily: isRTL ? 'Cairo, sans-serif' : 'Sora, sans-serif',
+    fontFamily: isRTL ? 'Cairo, sans-serif' : 'Alexandria, sans-serif',
   }
 
   const numberStyle: React.CSSProperties = {
     fontSize: 'clamp(40px, 8vw, 56px)',
     fontWeight: 700,
-    color: '#08331E',
+    color: '#022b63',
     lineHeight: 1,
     display: 'flex',
     alignItems: 'center',
@@ -42,7 +42,7 @@ export function StatsSection() {
   }
 
   const symbolStyle: React.CSSProperties = {
-    color: '#C19A5B',
+    color: '#d95015',
     fontSize: 'clamp(20px, 4vw, 32px)',
     fontWeight: 600,
     marginTop: '6px'
@@ -77,7 +77,7 @@ export function StatsSection() {
   }
 
   return (
-    <section style={{ background: '#F8F9F7', padding: '60px 0 0' }}>
+    <section style={{ background: '#FFFFFF', padding: '60px 0 0' }}>
       <div className="container-xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

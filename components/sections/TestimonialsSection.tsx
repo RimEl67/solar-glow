@@ -13,7 +13,7 @@ export function TestimonialsSection() {
       company: isRTL ? 'علاوي بروموسيون العقارية' : 'Alaoui Promotion Immobilière',
       location: isRTL ? 'مراكش' : 'Marrakech',
       time: isRTL ? 'قبل شهرين' : 'il y a 2 mois',
-      text: isRTL 
+      text: isRTL
         ? "لقد وضعنا ثقتنا في SolarGlow لتجهيز إقامتنا المكونة من 24 فيلا في مراكش. عمل جاد، احترام للمواعيد ومواكبة إدارية كاملة. المشترون سعداء بالقيمة المضافة للطاقة."
         : "Nous avons confié à SolarGlow l'équipement solaire de notre résidence de 24 villas à Marrakech. Travail sérieux, délais tenus et accompagnement administratif complet. Les acquéreurs sont ravis de la valeur ajoutée énergétique.",
       stars: 5,
@@ -21,7 +21,7 @@ export function TestimonialsSection() {
     },
     {
       name: isRTL ? 'حميد الشعيبي' : 'Hamid Chraibi',
-      company: isRTL ? 'الشعيبي وشركاؤه - الترويج' : 'Chraibi & Associés — Promotion',
+      company: isRTL ? 'الشعيبي وشركاؤه - الترويج' : 'Chraibi & Associés - Promotion',
       location: isRTL ? 'الدار البيضاء' : 'Casablanca',
       time: isRTL ? 'قبل شهر' : 'il y a 1 mois',
       text: isRTL
@@ -70,11 +70,11 @@ export function TestimonialsSection() {
     <section id="temoignages" ref={ref} style={{ background: '#FFFFFF', padding: '120px 0', overflow: 'hidden' }}>
       <div className="container-xl">
         {/* Top Section with Large Typography */}
-        <div style={{ 
-          display: 'flex', 
+        <div style={{
+          display: 'flex',
           flexDirection: isRTL ? 'row-reverse' : 'row',
-          justifyContent: 'space-between', 
-          alignItems: 'flex-start', 
+          justifyContent: 'space-between',
+          alignItems: 'flex-start',
           marginBottom: '80px',
           gap: '60px',
           flexWrap: 'wrap'
@@ -83,11 +83,11 @@ export function TestimonialsSection() {
             <div className="section-tag reveal" style={{ marginBottom: '24px', fontFamily: isRTL ? 'Cairo, sans-serif' : 'inherit' }}>
               {isRTL ? 'الشهادات' : 'TÉMOIGNAGES'}
             </div>
-            <h2 className="reveal delay-100" style={{ 
-              fontSize: 'clamp(40px, 8vw, 90px)', 
-              fontWeight: 900, 
-              lineHeight: 0.9, 
-              color: '#000', 
+            <h2 className="reveal delay-100" style={{
+              fontSize: 'clamp(40px, 8vw, 90px)',
+              fontWeight: 900,
+              lineHeight: 0.9,
+              color: '#000',
               textTransform: 'uppercase',
               letterSpacing: '-2px',
               fontFamily: 'Sora, sans-serif',
@@ -96,19 +96,19 @@ export function TestimonialsSection() {
               {isRTL ? 'هم يثقون بنا' : 'ILS NOUS FONT CONFIANCE'}
             </h2>
           </div>
-          
+
           <div className="reveal delay-200" style={{ flex: 1, minWidth: '300px', textAlign: isRTL ? 'right' : 'left' }}>
-            <p style={{ 
-              fontSize: '18px', 
-              color: '#444', 
-              lineHeight: 1.6, 
+            <p style={{
+              fontSize: '18px',
+              color: '#444',
+              lineHeight: 1.6,
               maxWidth: '500px',
               marginTop: '40px',
               fontFamily: isRTL ? 'Cairo, sans-serif' : 'inherit',
               [isRTL ? 'marginRight' : 'marginLeft']: 'auto'
             }}>
-              {isRTL 
-                ? "SolarGlow هي شركة جادة تركز على العلاقة مع عملائها. تقترح تدخلات كاملة، موثوقة ومستدامة." 
+              {isRTL
+                ? "SolarGlow هي شركة جادة تركز على العلاقة مع عملائها. تقترح تدخلات كاملة، موثوقة ومستدامة."
                 : "SolarGlow est une entreprise sérieuse qui met l'accent sur la relation avec ses clients. Elle propose des interventions complètes, fiables et durables."}
               <br /><br />
               {isRTL
@@ -119,15 +119,15 @@ export function TestimonialsSection() {
         </div>
 
         {/* Testimonials Grid */}
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
           gap: '24px',
           direction: isRTL ? 'rtl' : 'ltr'
         }}>
           {testimonials.map((t, i) => (
-            <div 
-              key={i} 
+            <div
+              key={i}
               className={`reveal-up delay-${(i + 1) * 100}`}
               style={{
                 background: '#F9F9F9',
@@ -157,28 +157,28 @@ export function TestimonialsSection() {
                 </div>
                 <div style={{ flex: 1 }}>
                   <div style={{ fontSize: '15px', fontWeight: 800, color: '#000', lineHeight: 1.2 }}>{t.name}</div>
-                  <div style={{ fontSize: '12px', color: '#666', marginTop: '2px' }}>{t.company} — {t.location}</div>
+                  <div style={{ fontSize: '12px', color: '#666', marginTop: '2px' }}>{t.company} - {t.location}</div>
                   <div style={{ fontSize: '11px', color: '#999', marginTop: '2px' }}>{t.time}</div>
                 </div>
               </div>
-              
+
               <div style={{ display: 'flex', gap: '4px', marginBottom: '16px' }}>
                 {[...Array(5)].map((_, star) => (
                   <span key={star} style={{ color: '#FFB800', fontSize: '14px' }}>★</span>
                 ))}
               </div>
 
-              <div style={{ 
-                height: '1px', 
-                background: '#E0E0E0', 
-                width: '40px', 
-                marginBottom: '16px' 
+              <div style={{
+                height: '1px',
+                background: '#E0E0E0',
+                width: '40px',
+                marginBottom: '16px'
               }} />
 
-              <p style={{ 
-                fontSize: '14px', 
-                color: '#333', 
-                lineHeight: 1.6, 
+              <p style={{
+                fontSize: '14px',
+                color: '#333',
+                lineHeight: 1.6,
                 margin: 0,
                 fontFamily: isRTL ? 'Cairo, sans-serif' : 'inherit'
               }}>

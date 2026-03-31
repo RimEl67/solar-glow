@@ -1,259 +1,207 @@
 'use client'
 
-import { useEffect, useState, useCallback, useRef } from 'react'
-import Link from 'next/link'
-import { useLanguage } from '@/context/LanguageContext'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useLoading } from '@/context/LoadingContext'
+import { useLanguage } from '@/context/LanguageContext'
+import { ChevronLeft, ChevronRight, Play } from 'lucide-react'
+import Link from 'next/link'
 
 export function HeroSection() {
   const { t, isRTL } = useLanguage()
-  const { setIsLoading, setProgress } = useLoading()
   const [current, setCurrent] = useState(0)
-  const [loadedVideos, setLoadedVideos] = useState<number[]>([])
+  const [progress, setProgress] = useState(0)
 
   const slides = [
     {
-      id: 0,
-      tag: t('hero_tag_1'),
-      title: t('hero_title_1'),
-      subtitle: t('hero_sub_1'),
-      cta: t('hero_cta_1'),
-      bg: '#1B5E20',
+      tag: t('hero_tag_4'),
+      title: t('hero_title_4'),
+      subtitle: t('hero_sub_4'),
+      cta: t('hero_cta_4'),
       video: '/vid.mp4'
     },
     {
-      id: 1,
-      tag: t('hero_tag_2'),
-      title: t('hero_title_2'),
-      subtitle: t('hero_sub_2'),
-      cta: t('hero_cta_2'),
-      bg: '#004D40',
-      video: '/vid1.mp4'
-    },
-    {
-      id: 2,
       tag: t('hero_tag_3'),
       title: t('hero_title_3'),
       subtitle: t('hero_sub_3'),
       cta: t('hero_cta_3'),
-      bg: '#0D47A1',
-      video: '/vid.mp4'
-    },
-    {
-      id: 3,
-      tag: t('hero_tag_4'),
-      title: t('hero_tag_4'),
-      subtitle: t('hero_sub_1'),
-      cta: t('hero_cta_1'),
-      bg: '#4A148C',
       video: '/vid1.mp4'
-    },
+    }
   ]
 
-  const next = useCallback(() => {
-    setCurrent((c) => (c + 1) % slides.length)
+  const nextSlide = useCallback(() => {
+    setCurrent((prev) => (prev + 1) % slides.length)
+    setProgress(0)
+  }, [slides.length])
+
+  const prevSlide = useCallback(() => {
+    setCurrent((prev) => (prev - 1 + slides.length) % slides.length)
+    setProgress(0)
   }, [slides.length])
 
   useEffect(() => {
-    const timer = setInterval(next, 7000)
+    const timer = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          nextSlide()
+          return 0
+        }
+        return prev + 0.5 // Adjust for speed
+      })
+    }, 40) // Roughly 8 seconds for a full cycle (100 / 0.5 * 40ms)
     return () => clearInterval(timer)
-  }, [next])
-
-  const handleVideoLoad = (index: number) => {
-    if (!loadedVideos.includes(index)) {
-      const newLoaded = [...loadedVideos, index]
-      setLoadedVideos(newLoaded)
-      
-      // Update progress based on how many videos are loaded
-      const totalVideos = slides.length
-      const currentProgress = (newLoaded.length / totalVideos) * 100
-      setProgress(currentProgress)
-
-      // If the first video (active) is loaded or we reached a good threshold, hide loader
-      if (newLoaded.includes(0)) {
-        setTimeout(() => {
-           setProgress(100)
-           setTimeout(() => setIsLoading(false), 500)
-        }, 500)
-      }
-    }
-  }
-
-  const prev = () => setCurrent((c) => (c - 1 + slides.length) % slides.length)
-
-  const slide = slides[current]
+  }, [nextSlide])
 
   return (
-    <section
-      id="hero"
-      className="hero-section"
-      style={{
-        position: 'relative',
-        height: '100vh',
-        minHeight: '600px',
-        maxHeight: '1080px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center', // Center for all screens to simplify
-        overflow: 'hidden',
-        background: '#000',
-      }}
-    >
-      {/* Background Videos with Cross-fade */}
-      {slides.map((s, index) => (
+    <section style={{
+      position: 'relative',
+      height: '100vh',
+      width: '100%',
+      overflow: 'hidden',
+      background: '#000',
+    }}>
+      {/* Background Videos */}
+      <AnimatePresence mode="wait">
         <motion.div
-          key={index}
+          key={current}
           initial={{ opacity: 0 }}
-          animate={{ opacity: index === current ? 1 : 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
           transition={{ duration: 1.2, ease: "easeInOut" }}
-          style={{
-            position: 'absolute',
-            inset: 0,
-            zIndex: index === current ? 1 : 0,
-            pointerEvents: 'none'
-          }}
+          style={{ position: 'absolute', inset: 0 }}
         >
           <video
             autoPlay
-            muted
             loop
+            muted
             playsInline
-            onCanPlayThrough={() => handleVideoLoad(index)}
             style={{
               width: '100%',
               height: '100%',
               objectFit: 'cover',
+              filter: 'brightness(0.8) contrast(1.1)'
             }}
           >
-            <source src={s.video} type="video/mp4" />
+            <source src={slides[current].video} type="video/mp4" />
           </video>
-          {/* Overlay for individual slide colors if needed */}
+          {/* Overlay Gradient */}
           <div style={{
             position: 'absolute',
             inset: 0,
-            background: `radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.2) 100%)`,
+            background: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.6) 100%)',
           }} />
         </motion.div>
-      ))}
+      </AnimatePresence>
 
-      {/* Persistent UI Elements above videos */}
-      
-      {/* Background decoration (Pattern) */}
-      <div style={{
-        position: 'absolute', inset: 0, zIndex: 2,
-        backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(255,255,255,0.03) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05) 0%, transparent 40%)',
-        pointerEvents: 'none'
-      }} />
-
-      {/* Decorative circles */}
-      <div style={{ position: 'absolute', [isRTL ? 'left' : 'right']: '-80px', top: '-80px', width: '400px', height: '400px', borderRadius: '50%', background: 'rgba(255,255,255,0.03)', zIndex: 1 }} />
-      <div style={{ position: 'absolute', [isRTL ? 'left' : 'right']: '80px', bottom: '-100px', width: '300px', height: '300px', borderRadius: '50%', background: 'rgba(255,255,255,0.05)', zIndex: 1 }} />
-
-      {/* Content */}
-      <div className="container-xl" style={{ 
-        position: 'relative', 
-        zIndex: 10, 
-        width: '100%',
+      {/* Content Overlay */}
+      <div className="container-xl" style={{
+        position: 'relative',
+        zIndex: 10,
+        height: '100%',
         display: 'flex',
-        justifyContent: isRTL ? 'flex-end' : 'flex-start',
-        padding: '0 20px'
+        flexDirection: 'column',
+        justifyContent: 'center',
+        paddingTop: '80px',
+        textAlign: isRTL ? 'right' : 'left',
       }}>
         <AnimatePresence mode="wait">
           <motion.div
             key={current}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            style={{ 
-              maxWidth: '720px', 
-              textAlign: isRTL ? 'right' : 'left',
-              margin: isRTL ? '0 0 0 auto' : '0'
-            }}
-            className="mobile-content-center"
+            transition={{ duration: 0.8, delay: 0.2 }}
+            style={{ maxWidth: '750px' }}
           >
-            {/* Tag */}
+            {/* Pill Tag */}
             <div style={{
-              display: 'inline-flex', alignItems: 'center', gap: '8px',
-              background: 'rgba(255,255,255,0.12)',
-              borderRadius: '50px', padding: '6px 16px',
-              fontSize: '12px', color: '#fff', fontWeight: 600,
+              display: 'inline-flex',
+              padding: '8px 20px',
+              background: 'rgba(255, 255, 255, 0.2)',
+              backdropFilter: 'blur(10px)',
+              borderRadius: '30px',
+              border: '1px solid rgba(255, 255, 255, 0.3)',
               marginBottom: '24px',
-              border: '1px solid rgba(255,255,255,0.2)',
-              flexDirection: isRTL ? 'row-reverse' : 'row',
-              letterSpacing: '0.5px',
-              textTransform: 'uppercase'
+              fontSize: '13px',
+              fontWeight: 700,
+              color: '#FFFFFF',
+              letterSpacing: '1px',
+              textTransform: 'uppercase',
+              fontFamily: isRTL ? 'Cairo, sans-serif' : 'Alexandria, sans-serif'
             }}>
-              {slide.tag}
+              {slides[current].tag}
             </div>
 
             {/* Title */}
             <h1 style={{
-              fontFamily: isRTL ? 'Cairo, sans-serif' : 'Sora, sans-serif',
-              fontSize: 'clamp(34px, 7vw, 64px)',
-              fontWeight: 900,
-              color: '#fff',
-              lineHeight: isRTL ? 1.3 : 1.05,
-              marginBottom: '20px',
+              fontSize: 'clamp(32px, 6vw, 64px)',
+              lineHeight: 1.1,
+              fontWeight: 800,
+              color: '#FFFFFF',
+              marginBottom: '24px',
               letterSpacing: '-1.5px',
-              textShadow: '0 2px 10px rgba(0,0,0,0.3)'
+              fontFamily: isRTL ? 'Cairo, sans-serif' : 'Alexandria, sans-serif'
             }}>
-              {slide.title}
+              {slides[current].title}
             </h1>
 
             {/* Subtitle */}
             <p style={{
-              fontSize: 'clamp(15px, 2.5vw, 20px)',
-              color: 'rgba(255,255,255,0.9)',
+              fontSize: 'clamp(16px, 2vw, 20px)',
+              color: 'rgba(255,255,255,0.95)',
+              marginBottom: '48px',
+              maxWidth: '600px',
               lineHeight: 1.6,
-              marginBottom: '40px',
-              maxWidth: '560px',
-              marginLeft: isRTL ? 'auto' : '0',
-              marginRight: isRTL ? '0' : 'auto',
-              textShadow: '0 1px 5px rgba(0,0,0,0.2)'
-            }}
-            className="hero-subtitle-mobile"
-            >
-              {slide.subtitle}
+              fontWeight: 500,
+              fontFamily: isRTL ? 'Cairo, sans-serif' : 'inherit'
+            }}>
+              {slides[current].subtitle}
             </p>
 
-            {/* CTAs */}
-            <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', flexDirection: isRTL ? 'row-reverse' : 'row' }}>
+            {/* CTA Buttons */}
+            <div style={{
+              display: 'flex',
+              gap: '20px',
+              flexDirection: isRTL ? 'row-reverse' : 'row',
+              flexWrap: 'wrap'
+            }}>
               <Link
                 href="/produits"
                 style={{
-                  background: '#fff', color: '#1B4D2E',
-                  border: 'none', borderRadius: '12px',
-                  padding: '16px 32px',
-                  fontSize: '15px', fontWeight: 800,
-                  cursor: 'pointer', fontFamily: isRTL ? 'Cairo, sans-serif' : 'DM Sans, sans-serif',
+                  padding: '18px 36px',
+                  background: '#FFFFFF',
+                  color: '#1A1A1A',
+                  borderRadius: '12px',
+                  fontSize: '16px',
+                  fontWeight: 700,
+                  textDecoration: 'none',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '12px',
                   transition: 'all 0.3s ease',
-                  display: 'flex', alignItems: 'center', gap: '10px',
-                  boxShadow: '0 10px 40px rgba(0,0,0,0.3)',
-                  flexDirection: isRTL ? 'row-reverse' : 'row',
-                  textDecoration: 'none'
+                  boxShadow: '0 10px 30px rgba(0,0,0,0.1)'
                 }}
-                className="w-full sm:w-auto justify-center"
+                className="hover:scale-105"
               >
-                {slide.cta} {isRTL ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
+                {slides[current].cta}
+                {!isRTL && <ChevronRight size={18} />}
+                {isRTL && <ChevronLeft size={18} />}
               </Link>
+
               <Link
                 href="/contact"
                 style={{
-                  background: 'rgba(255,255,255,0.08)', color: '#fff',
-                  border: '1px solid rgba(255,255,255,0.25)',
+                  padding: '18px 36px',
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  backdropFilter: 'blur(10px)',
+                  color: '#FFFFFF',
                   borderRadius: '12px',
-                  padding: '16px 32px',
-                  fontSize: '15px', fontWeight: 700,
-                  cursor: 'pointer', fontFamily: isRTL ? 'Cairo, sans-serif' : 'DM Sans, sans-serif',
-                  transition: 'all 0.3s ease',
-                  backdropFilter: 'blur(12px)',
+                  fontSize: '16px',
+                  fontWeight: 700,
                   textDecoration: 'none',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center'
+                  border: '1px solid rgba(255,255,255,0.3)',
+                  transition: 'all 0.3s ease'
                 }}
-                className="w-full sm:w-auto"
+                className="hover:bg-white hover:text-black"
               >
                 {t('ui_devis')}
               </Link>
@@ -262,62 +210,45 @@ export function HeroSection() {
         </AnimatePresence>
       </div>
 
-      {/* Slide indicators */}
+
+
+      {/* Progress Line */}
       <div style={{
-        position: 'absolute', bottom: '32px', left: '50%', transform: 'translateX(-50%)',
-        display: 'flex', gap: '10px', zIndex: 20,
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        height: '4px',
+        width: `${progress}%`,
+        background: '#d95015',
+        zIndex: 30,
+        transition: 'width 0.04s linear'
+      }} />
+
+      {/* Slide Indicators (Optional) */}
+      <div style={{
+        position: 'absolute',
+        right: '40px',
+        bottom: '80px',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '12px',
+        zIndex: 20
       }}>
         {slides.map((_, i) => (
-          <button
+          <div
             key={i}
-            onClick={() => setCurrent(i)}
+            onClick={() => { setCurrent(i); setProgress(0); }}
             style={{
-              width: i === current ? '36px' : '10px',
-              height: '10px',
-              borderRadius: '50px',
-              background: i === current ? '#fff' : 'rgba(255,255,255,0.3)',
-              border: 'none', cursor: 'pointer',
-              transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)', padding: 0,
+              width: '4px',
+              height: i === current ? '40px' : '20px',
+              background: i === current ? '#d95015' : 'rgba(255,255,255,0.3)',
+              borderRadius: '2px',
+              cursor: 'pointer',
+              transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)'
             }}
           />
         ))}
       </div>
-
-      {/* Arrow controls - Desktop only */}
-      <button
-        onClick={prev}
-        className="hidden md:flex"
-        style={{
-          position: 'absolute', left: '32px', top: '50%', transform: 'translateY(-50%)',
-          background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)',
-          borderRadius: '50%', width: '56px', height: '56px',
-          alignItems: 'center', justifyContent: 'center',
-          cursor: 'pointer', color: '#fff', zIndex: 20,
-          transition: 'all 0.3s ease',
-          backdropFilter: 'blur(10px)',
-        }}
-        onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.2)', e.currentTarget.style.borderColor = '#fff')}
-        onMouseLeave={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.08)', e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)')}
-      >
-        <ChevronLeft size={28} />
-      </button>
-      <button
-        onClick={next}
-        className="hidden md:flex"
-        style={{
-          position: 'absolute', right: '32px', top: '50%', transform: 'translateY(-50%)',
-          background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)',
-          borderRadius: '50%', width: '56px', height: '56px',
-          alignItems: 'center', justifyContent: 'center',
-          cursor: 'pointer', color: '#fff', zIndex: 20,
-          transition: 'all 0.3s ease',
-          backdropFilter: 'blur(10px)',
-        }}
-        onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.2)', e.currentTarget.style.borderColor = '#fff')}
-        onMouseLeave={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.08)', e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)')}
-      >
-        <ChevronRight size={28} />
-      </button>
     </section>
   )
 }

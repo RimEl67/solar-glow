@@ -65,7 +65,7 @@ export function TechDemoSection() {
 
             {/* Headline */}
             <h2 className="reveal delay-100" style={{
-              
+
               fontSize: 'clamp(36px, 4vw, 56px)',
               fontWeight: 900,
               color: '#fff',
@@ -169,7 +169,7 @@ export function TechDemoSection() {
                 zIndex: 5,
               }}>
                 <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#4ADE80', boxShadow: '0 0 8px #4ADE80', animation: 'glowPulse 1.5s ease-in-out infinite' }} />
-                <span style={{ fontSize: '12px', color: '#C5D9CB', letterSpacing: '1px' }}>INSTALLATION EN COURS — RABAT, MAROC</span>
+                <span style={{ fontSize: '12px', color: '#C5D9CB', letterSpacing: '1px' }}>INSTALLATION EN COURS - RABAT, MAROC</span>
               </div>
             </div>
           </div>
